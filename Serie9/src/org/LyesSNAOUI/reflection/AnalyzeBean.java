@@ -53,30 +53,75 @@ public class AnalyzeBean {
 		return 	field.get(bean);
 	}
 
-	public void setint(Object bean, String property, Object value) throws NoSuchFieldException, SecurityException,
-	IllegalArgumentException, IllegalAccessException, NoSuchMethodException, InvocationTargetException{
+	public void set(Object bean, String property, Object value) throws NoSuchFieldException, SecurityException,
+	IllegalArgumentException, IllegalAccessException, NoSuchMethodException, InvocationTargetException, ClassNotFoundException{
 
-		Field field = bean.getClass().getDeclaredField(property);
+		Class<?> cls = bean.getClass();
+
+		if (cls == Class.forName("org.LyesSNAOUI.reflection.Person")) {
+
+			Field field = cls.getDeclaredField(property);
+			field.setAccessible(true);
+
+			String methodName = "set" + property.substring(0,1).toUpperCase() + property.substring(1).toLowerCase();
+			System.out.println(methodName);
+
+			bean.getClass().getMethod(methodName, String.class).invoke(bean, value);
+		}
+		else {
+			Field field = cls.getSuperclass().getDeclaredField(property);
+			field.setAccessible(true);
+
+			String methodName = "set" + property.substring(0,1).toUpperCase() + property.substring(1).toLowerCase();
+			System.out.println(methodName);
+
+			bean.getClass().getSuperclass().getMethod(methodName, String.class).invoke(bean, value);
+		}
+
+
+
+	}
+
+	public void setage(Object bean, String property, Object value) throws NoSuchFieldException, SecurityException,
+	IllegalArgumentException, IllegalAccessException, NoSuchMethodException, InvocationTargetException, ClassNotFoundException{
+
+		Class<?> cls = bean.getClass();
+		
+		if (cls == Class.forName("org.LyesSNAOUI.reflection.Person")) {
+			Field field = cls.getDeclaredField(property);
+			field.setAccessible(true);
+
+			String methodName = "set" + property.substring(0,1).toUpperCase() + property.substring(1).toLowerCase();
+			System.out.println(methodName);
+
+			bean.getClass().getMethod(methodName, int.class).invoke(bean, value);
+		}
+		else {
+			Field field = cls.getSuperclass().getDeclaredField(property);
+			field.setAccessible(true);
+
+			String methodName = "set" + property.substring(0,1).toUpperCase() + property.substring(1).toLowerCase();
+			System.out.println(methodName);
+
+			bean.getClass().getSuperclass().getMethod(methodName, int.class).invoke(bean, value);
+		}
+		}
+	
+	public void setSalary(Object bean, String property, Object value) throws NoSuchFieldException, SecurityException,
+	IllegalArgumentException, IllegalAccessException, NoSuchMethodException, InvocationTargetException, ClassNotFoundException{
+
+		Class<?> cls = bean.getClass();
+		Field field = cls.getDeclaredField(property);
 		field.setAccessible(true);
 
 		String methodName = "set" + property.substring(0,1).toUpperCase() + property.substring(1).toLowerCase();
 		System.out.println(methodName);
 
 		bean.getClass().getMethod(methodName, int.class).invoke(bean, value);
+		
 	}
-
-	public void set(Object bean, String property, Object value) throws NoSuchFieldException, SecurityException,
-	IllegalArgumentException, IllegalAccessException, NoSuchMethodException, InvocationTargetException{
-
-		Field field = bean.getClass().getDeclaredField(property);
-		field.setAccessible(true);
-
-		String methodName = "set" + property.substring(0,1).toUpperCase() + property.substring(1).toLowerCase();
-		System.out.println(methodName);
-
-		bean.getClass().getMethod(methodName, String.class).invoke(bean, value);
-	}
-
+		
+	
 }
 
 

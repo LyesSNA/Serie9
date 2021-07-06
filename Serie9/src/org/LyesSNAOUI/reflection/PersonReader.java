@@ -50,7 +50,9 @@ public class PersonReader extends FileReader{
 						
 						ab.set(bean, "lname", br.readLine().split("=")[1]);
 						ab.set(bean, "fname", br.readLine().split("=")[1]);
-						ab.setint(bean, "age", Integer.parseInt(br.readLine().split("=")[1]));	
+						ab.setage(bean, "age", Integer.parseInt(br.readLine().split("=")[1]));	
+						if (clas == Class.forName("org.LyesSNAOUI.reflection.Employee"))
+							ab.setSalary(bean, "salary", Integer.parseInt(br.readLine().split("=")[1]));
 						System.out.println("this" + bean);
 
 						obj.add(bean);

@@ -2,6 +2,13 @@ package org.LyesSNAOUI.reflection;
 
 public class Employee extends Person{
 
+	
+	@Override
+	public String toString() {
+		return    "Employee [ Lname=" + getLname()
+				+ ", Fname=" + getFname() + ", Age=" + getAge() +"Employee [salary=" + salary + "]";
+	}
+
 	int salary;
 	
 	public Employee(String lName, String fName, int age, int salary) {
