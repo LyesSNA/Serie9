@@ -52,6 +52,12 @@ public class AnalyzeBean {
 		field.setAccessible(true);
 		return 	field.get(bean);
 	}
+	
+	public Object getFromSuper(Object bean, String property)  throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException{
+		Field field = bean.getClass().getSuperclass().getDeclaredField(property);
+		field.setAccessible(true);
+		return 	field.get(bean);
+	}
 
 	public void set(Object bean, String property, Object value) throws NoSuchFieldException, SecurityException,
 	IllegalArgumentException, IllegalAccessException, NoSuchMethodException, InvocationTargetException, ClassNotFoundException{
